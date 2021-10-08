@@ -41,6 +41,14 @@ const ViewOrders = (props) => {
     setOpen(false);
   };
 
+  const disAgree = () => {
+    setOpen(false);
+  };
+  const agree = () => {
+    setOpen(false);
+    setaddSuccess(true);
+  };
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -81,7 +89,7 @@ const ViewOrders = (props) => {
         {addSuccess ? (
           <Alert severity="success">
             <AlertTitle>Success</AlertTitle>
-            Estimates Prices Confirmed
+            Supplier Order Confirmed
           </Alert>
         ) : (
           ""
@@ -159,6 +167,7 @@ const ViewOrders = (props) => {
                     backgroundColor: "green",
                     borderRadius: 25,
                   }}
+                  onClick={handleClickOpen}
                 >
                   Confirm
                 </Button>
@@ -167,6 +176,27 @@ const ViewOrders = (props) => {
           </Card>
         </div>
       </div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Please Confirm Your Decision!"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description"></DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={disAgree} style={{ color: "red" }}>
+            Disagree
+          </Button>
+          <Button onClick={agree} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
