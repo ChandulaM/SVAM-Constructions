@@ -12,12 +12,12 @@ it("renders header", () => {
 });
 
 it("renders header in login", () => {
-  const { queryByTitle } = render(
+  const { queryAllByTitle } = render(
     <UserContextProvider>
       <Login />
     </UserContextProvider>
   );
-  const header = queryByTitle("header");
+  const header = queryAllByTitle("header");
 
   expect(header).toBeTruthy();
 });

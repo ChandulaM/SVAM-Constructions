@@ -6,26 +6,33 @@ import { MemoryRouter } from "react-router-dom";
 import SetPrice from "../components/procurement/set-price/SetPrice";
 
 it("renders header in component", () => {
-  const { queryByTitle } = render(<Header />);
-  const header = queryByTitle("header");
+  const { queryAllByTitle } = render(<Header />);
+  const header = queryAllByTitle("header");
 
   expect(header).toBeTruthy();
 });
 
 it("renders sidenav in component", () => {
-  const { queryByTitle } = render(
+  const { queryAllByTitle } = render(
     <MemoryRouter initialEntries={[{ pathname: "/" }]}>
       <SideNavP />
     </MemoryRouter>
   );
-  const sidenav = queryByTitle("sidenav-p");
+  const sidenav = queryAllByTitle("sidenav-p");
 
   expect(sidenav).toBeTruthy();
 });
 
-// describe("when entering values", () => {
-//   const { queryByTitle } = render(<SetPrice />);
+describe("when entering values", () => {
+  const { queryByTitle } = render(
+    <MemoryRouter initialEntries={[{ pathname: "/" }]}>
+      <SetPrice />
+    </MemoryRouter>
+  );
 
-//   const selectedUnit = queryByTitle("unit");
-//   const enteredPrice = queryByTitle("price");
-// });
+  const enteredPrice = queryByTitle("price").querySelector("input");
+
+  fireEvent.input(enteredPrice, { target: { value: 123 } });
+
+  expect(enteredPrice.value).toBe("123");
+});
