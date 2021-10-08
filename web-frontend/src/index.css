@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.sidenav-listitem {
+  @apply bg-gray-200 p-4 my-4 hover:bg-yellow-400 active:bg-yellow-500 text-base font-semibold;
+}
+
+.sidenav-item-active {
+  @apply hover:bg-yellow-400 bg-yellow-500 text-base font-semibold p-4 my-3 shadow-md;
+}
+
+.order-card {
+  @apply flex flex-col w-1/4 justify-start items-stretch shadow-lg p-6 rounded-lg bg-white m-4;
+}
+
+.form-row {
+  @apply flex flex-row my-5 justify-between;
+}
