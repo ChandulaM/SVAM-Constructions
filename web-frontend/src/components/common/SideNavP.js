@@ -8,7 +8,7 @@ const SideNavP = () => {
   const location = useLocation().pathname;
 
   return (
-    <div className="flex flex-2">
+    <div className="flex flex-2" title="sidenav-p">
       <div className="flex-col flex-1 mb-0 pt-4 bg-gray-300 h-screen w-64">
         <div className="w-32 h-32 m-auto rounded-full bg-white p-1 mb-5">
           <img className="rounded-full p-1" src={logo} alt="Logo" />

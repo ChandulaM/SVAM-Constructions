@@ -54,6 +54,7 @@ const SetPrice = () => {
                     <InputLabel id="unitLabel">Select Item</InputLabel>
                     <Select
                       fullWidth
+                      title="unit"
                       labelId="unitLabel"
                       id="unit"
                       value={values.unit}
@@ -75,6 +76,7 @@ const SetPrice = () => {
                       fullWidth
                       type="number"
                       id="outlined-adornment-amount"
+                      title="price"
                       value={values.price}
                       onChange={handleChange("price")}
                       startAdornment={

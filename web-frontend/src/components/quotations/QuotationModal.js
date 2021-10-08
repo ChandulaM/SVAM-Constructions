@@ -65,7 +65,7 @@ function QuotationModal({ quote, open, setOpen }) {
             </div>
             <div className="text-lg font-semibold bg-gray-400 p-1">Unit</div>
             <div className="text-lg font-semibold bg-gray-400 p-1">
-              Price (Rs.)
+              Price Per Unit(Rs.)
             </div>
             {itemList.items &&
               itemList.items.map((item) => (

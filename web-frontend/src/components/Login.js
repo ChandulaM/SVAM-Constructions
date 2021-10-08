@@ -74,6 +74,7 @@ const Login = (props) => {
                   id="username"
                   label="Username"
                   variant="outlined"
+                  title="username"
                   value={credentials.username}
                   onChange={handleChange("username")}
                 />
@@ -84,12 +85,16 @@ const Login = (props) => {
                   id="password"
                   label="Password"
                   variant="outlined"
+                  title="password"
                   type="password"
                   value={credentials.password}
                   onChange={handleChange("password")}
                 />
               </div>
-              <div className="w-80 mt-2 mb-3 mx-8 text-sm text-semibold text-red-700">
+              <div
+                title="error"
+                className="w-80 mt-2 mb-3 mx-8 text-sm text-semibold text-red-700"
+              >
                 {loginError ? "Incorrect username or password" : ""}
               </div>
               <div className="flex w-80 my-3 mx-8 justify-center">
