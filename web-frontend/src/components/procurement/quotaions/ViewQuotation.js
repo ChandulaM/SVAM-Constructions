@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Header from "../../common/Header";
 import SideNavP from "../../common/SideNavP";
 import Card from "@mui/material/Card";
@@ -13,40 +13,44 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import { QuotationPContext } from "../../../contexts/Order-reqests/QuotationContext";
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
+const ViewQuotation = (props) => {
+  const { items, setItems } = useContext(QuotationPContext);
+  const itemId = props.match.params.id;
+  const itemList = items.find((item) => item.id === itemId);
+  const itemListIndex = items.findIndex((item) => item.id === itemId);
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    "&:last-child td, &:last-child th": {
+      border: 0,
+    },
+  }));
 
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+  function createData(id, name, qty, ePrice) {
+    return { id, name, qty, ePrice };
+  }
 
-const ViewQuotation = (params) => {
+  const rows = [
+    itemList.items.map((item) =>
+      createData(item.id, item.name, item.quantity, item.price)
+    ),
+  ];
   return (
     <div className="grid grid-cols-5">
       <div className="col-span-1">
@@ -57,40 +61,39 @@ const ViewQuotation = (params) => {
         <div className="flex w-3/4 mx-auto mt-10 ">
           <Card className="flex-1 p-5">
             <CardContent className="flex-1">
+              <TableRow>
+                <StyledTableCell style={{ fontSize: 20 }}>
+                  Quotation No: {itemList.id}
+                </StyledTableCell>
+                <StyledTableCell align="right" style={{ fontSize: 20 }}>
+                  Date: {itemList.curDate}
+                </StyledTableCell>
+                <StyledTableCell align="right" style={{ fontSize: 20 }}>
+                  Issued By: {itemList.issued}
+                </StyledTableCell>
+              </TableRow>
               <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                   <TableHead>
                     <TableRow>
-                      <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                      <StyledTableCell align="right">Calories</StyledTableCell>
+                      <StyledTableCell>Item Name</StyledTableCell>
+                      <StyledTableCell align="right">Quantity</StyledTableCell>
                       <StyledTableCell align="right">
-                        Fat&nbsp;(g)
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        Carbs&nbsp;(g)
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        Protein&nbsp;(g)
+                        Estimated Price
                       </StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {rows.map((row) => (
+                    {rows[0].map((row) => (
                       <StyledTableRow key={row.name}>
                         <StyledTableCell component="th" scope="row">
                           {row.name}
                         </StyledTableCell>
                         <StyledTableCell align="right">
-                          {row.calories}
+                          {row.qty}
                         </StyledTableCell>
                         <StyledTableCell align="right">
-                          {row.fat}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {row.carbs}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {row.protein}
+                          {row.ePrice}
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
@@ -98,17 +101,19 @@ const ViewQuotation = (params) => {
                 </Table>
               </TableContainer>
               <div className="flex w-80 my-3 mx-8 justify-center ">
-                <Button
-                  fullWidth
-                  variant="contained"
-                  size="large"
-                  style={{
-                    backgroundColor: "gray",
-                    borderRadius: 25,
-                  }}
-                >
-                  Back
-                </Button>
+                <Link to="/procurement/quotations">
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    size="large"
+                    style={{
+                      backgroundColor: "gray",
+                      borderRadius: 25,
+                    }}
+                  >
+                    Back
+                  </Button>
+                </Link>
                 <Button
                   fullWidth
                   variant="contained"

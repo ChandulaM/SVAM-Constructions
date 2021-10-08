@@ -12,14 +12,17 @@ const Invoice = ({ invoices }) => {
       </div>
       <div className="flex flex-row flex-1 justify-between my-2">
         <p className="font-semibold text-xl">Date</p>
-        <p className="font-normal text-xl text-gray-600">{invoices.date}</p>
+        <p className="font-normal text-xl text-gray-600">{invoices.curDate}</p>
       </div>
       <div className="flex flex-row flex-1 justify-between my-2">
         <p className="font-semibold text-xl">Issued By</p>
         <p className="font-normal text-xl text-gray-600">{invoices.issued}</p>
       </div>
       <div className="flex flex-row flex-1 justify-between items-center my-2">
-        <Link to="/procurement/view-invoice">
+        <Link
+          className="flex flex-1"
+          to={{ pathname: `/procurement/view-invoice/${invoices.id}` }}
+        >
           <Button
             fullWidth
             variant="contained"

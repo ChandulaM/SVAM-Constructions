@@ -12,14 +12,17 @@ const Order = ({ order }) => {
       </div>
       <div className="flex flex-row flex-1 justify-between my-2">
         <p className="font-semibold text-xl">Date</p>
-        <p className="font-normal text-xl text-gray-600">{order.date}</p>
+        <p className="font-normal text-xl text-gray-600">{order.curDate}</p>
       </div>
       <div className="flex flex-row flex-1 justify-between my-2">
         <p className="font-semibold text-xl">Site</p>
         <p className="font-normal text-xl text-gray-600">{order.site}</p>
       </div>
       <div className="flex flex-row flex-1 justify-between items-center my-2">
-        <Link to="/procurement/view-order-requests">
+        <Link
+          className="flex flex-1"
+          to={{ pathname: `/procurement/view-order-requests/${order.id}` }}
+        >
           <Button
             fullWidth
             variant="contained"

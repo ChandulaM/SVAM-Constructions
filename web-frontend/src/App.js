@@ -28,6 +28,10 @@ import ItemContextProvider from "./contexts/Items/ItemContext";
 import QuotationContextProvider from "./contexts/Quotations/QuotationContext";
 import { UserContextProvider } from "./contexts/User/UserContext";
 import { OrderContextProvider } from "./contexts/Orders/OrderContext";
+import OrderRequestContextProvider from "./contexts/Order-reqests/OrderRequestContext";
+import InvoicePContextProvider from "./contexts/Order-reqests/InvoiceContext";
+import OrderPContextProvider from "./contexts/Order-reqests/OrderContext";
+import QuotationPContextProvider from "./contexts/Order-reqests/QuotationContext";
 
 function App() {
   return (
@@ -36,43 +40,72 @@ function App() {
         <Switch>
           <Route path="/" exact component={Login} />
           <Route path="/add-user" exact component={AddUser} />
-
-          <Route
-            path="/procurement/order-request"
-            exact
-            component={OrderRequest}
-          />
-          <Route path="/procurement/quotations" exact component={QuotationsP} />
-          <Route path="/procurement/invoices" exact component={Invoices} />
-          <Route path="/procurement/orders" exact component={OrdersP} />
-          <Route path="/procurement/set-price" exact component={SetPrice} />
-          <Route
-            path="/procurement/view-order-requests"
-            exact
-            component={ViewOrderRequest}
-          />
-          <Route
-            path="/procurement/view-invoice"
-            exact
-            component={ViewInvoice}
-          />
-          <Route path="/procurement/view-orders" exact component={ViewOrders} />
-          <Route
-            path="/procurement/view-quotations"
-            exact
-            component={ViewQuotation}
-          />
           <Route path="/add-invoice" exact component={CreateInvoice} />
           <Route path="/generate-reciept" exact component={GenerateReciept} />
           <OrderContextProvider>
             <QuotationContextProvider>
               <ItemContextProvider>
-                <Route path="/orders" exact component={Orders} />
-                <Route path="/quotations" exact component={Quotations} />
-                <Route path="/add-quotation" exact component={AddQuotation} />
-                <Route path="/list-items" exact component={Items} />
-                <Route path="/list-items/:id" exact component={ItemListTable} />
-              </ItemContextProvider>
+			  <OrderRequestContextProvider>
+                  <InvoicePContextProvider>
+                    <OrderPContextProvider>
+                      <QuotationPContextProvider>
+						<Route path="/orders" exact component={Orders} />
+						<Route path="/quotations" exact component={Quotations} />
+						<Route path="/add-quotation" exact component={AddQuotation} />
+						<Route path="/list-items" exact component={Items} />
+						<Route path="/list-items/:id" exact component={ItemListTable} />
+						
+                        <Route
+                          path="/procurement/order-request"
+                          exact
+                          component={OrderRequest}
+                        />
+                        <Route
+                          path="/procurement/view-order-requests/:id"
+                          exactOrderRequestContextProvider
+                          component={ViewOrderRequest}
+                        />
+                        <Route
+                          path="/procurement/quotations"
+                          exact
+                          component={QuotationsP}
+                        />
+                        <Route
+                          path="/procurement/invoices"
+                          exact
+                          component={Invoices}
+                        />
+                        <Route
+                          path="/procurement/orders"
+                          exact
+                          component={OrdersP}
+                        />
+                        <Route
+                          path="/procurement/set-price"
+                          exact
+                          component={SetPrice}
+                        />
+
+                        <Route
+                          path="/procurement/view-invoice/:id"
+                          exact
+                          component={ViewInvoice}
+                        />
+                        <Route
+                          path="/procurement/view-orders/:id"
+                          exact
+                          component={ViewOrders}
+                        />
+                        <Route
+                          path="/procurement/view-quotations/:id"
+                          exact
+                          component={ViewQuotation}
+                        />
+					  </QuotationPContextProvider>
+                    </OrderPContextProvider>
+                  </InvoicePContextProvider>
+                </OrderRequestContextProvider>
+			  </ItemContextProvider>
             </QuotationContextProvider>
           </OrderContextProvider>
         </Switch>

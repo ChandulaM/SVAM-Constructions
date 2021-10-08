@@ -12,14 +12,17 @@ const Quotation = ({ quotations }) => {
       </div>
       <div className="flex flex-row flex-1 justify-between my-2">
         <p className="font-semibold text-xl">Date</p>
-        <p className="font-normal text-xl text-gray-600">{quotations.date}</p>
+        <p className="font-normal text-xl text-gray-600">{quotations.curDate}</p>
       </div>
       <div className="flex flex-row flex-1 justify-between my-2">
         <p className="font-semibold text-xl">Issued By</p>
         <p className="font-normal text-xl text-gray-600">{quotations.issued}</p>
       </div>
       <div className="flex flex-row flex-1 justify-between items-center my-2">
-        <Link to="/procurement/view-quotations">
+        <Link
+          className="flex flex-1"
+          to={{ pathname: `/procurement/view-quotations/${quotations.id}` }}
+        >
           <Button
             fullWidth
             variant="contained"

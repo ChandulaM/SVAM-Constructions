@@ -12,10 +12,10 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 
 const measurementUnits = [
-  { unit: "g", value: "Grams (g)" },
-  { unit: "kg", value: "Kilograms (kg)" },
-  { unit: "lb", value: "Pounds (lb)" },
-  { unit: "t", value: "Tonnes (t)" },
+  { unit: "g", value: "Metal" },
+  { unit: "kg", value: "Cement" },
+  { unit: "lb", value: "Brickes" },
+  { unit: "t", value: "Iron Bars" },
 ];
 
 const state = {
@@ -78,7 +78,7 @@ const SetPrice = () => {
                       value={values.price}
                       onChange={handleChange("price")}
                       startAdornment={
-                        <InputAdornment position="start">$</InputAdornment>
+                        <InputAdornment position="start">Rs.</InputAdornment>
                       }
                       label="Price"
                     />
