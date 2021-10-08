@@ -15,12 +15,31 @@ import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { OrderContext } from "../../../contexts/Order-reqests/OrderContext";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 
 const ViewOrders = (props) => {
   const { items, setItems } = useContext(OrderContext);
   const itemId = props.match.params.id;
   const itemList = items.find((item) => item.id === itemId);
   const itemListIndex = items.findIndex((item) => item.id === itemId);
+
+  const [addSuccess, setaddSuccess] = useState(false);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -59,9 +78,20 @@ const ViewOrders = (props) => {
       </div>
       <div className="col-span-4 bg-yellow-100">
         <Header />
+        {addSuccess ? (
+          <Alert severity="success">
+            <AlertTitle>Success</AlertTitle>
+            Estimates Prices Confirmed
+          </Alert>
+        ) : (
+          ""
+        )}
         <div className="flex w-3/4 mx-auto mt-10 ">
           <Card className="flex-1 p-5">
             <CardContent className="flex-1">
+              <div style={{ fontSize: 25, textAlign: "center" }}>
+                View Supplier Order
+              </div>
               <TableRow>
                 <StyledTableCell style={{ fontSize: 20 }}>
                   Order No: {itemList.id}
@@ -99,10 +129,9 @@ const ViewOrders = (props) => {
                   </TableBody>
                 </Table>
               </TableContainer>
-              <div className="flex w-80 my-3 mx-8 justify-center ">
+              <div className="flex my-3 mx-8 justify-center ">
                 <Link to="/procurement/orders">
                   <Button
-                    fullWidth
                     variant="contained"
                     size="large"
                     style={{
@@ -113,6 +142,26 @@ const ViewOrders = (props) => {
                     Back
                   </Button>
                 </Link>
+                <Button
+                  variant="contained"
+                  size="large"
+                  style={{
+                    backgroundColor: "red",
+                    borderRadius: 25,
+                  }}
+                >
+                  cancel
+                </Button>
+                <Button
+                  variant="contained"
+                  size="large"
+                  style={{
+                    backgroundColor: "green",
+                    borderRadius: 25,
+                  }}
+                >
+                  Confirm
+                </Button>
               </div>
             </CardContent>
           </Card>

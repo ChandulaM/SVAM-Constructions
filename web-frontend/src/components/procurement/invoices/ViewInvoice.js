@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useContext } from "react";
 import Header from "../../common/Header";
 import SideNavP from "../../common/SideNavP";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { styled } from "@mui/material/styles";
@@ -15,12 +17,41 @@ import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { InvoiceContext } from "../../../contexts/Order-reqests/InvoiceContext";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const ViewInvoice = (props) => {
   const { items, setItems } = useContext(InvoiceContext);
   const itemId = props.match.params.id;
   const itemList = items.find((item) => item.id === itemId);
   const itemListIndex = items.findIndex((item) => item.id === itemId);
+  const [addSuccess, setaddSuccess] = useState(false);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const disAgree = () => {
+    setOpen(false);
+  };
+  const agree = () => {
+    setOpen(false);
+    setaddSuccess(true);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setaddSuccess(true);
+  };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -58,9 +89,20 @@ const ViewInvoice = (props) => {
       </div>
       <div className="col-span-4 bg-yellow-100">
         <Header />
+        {addSuccess ? (
+          <Alert severity="success">
+            <AlertTitle>Success</AlertTitle>
+            Estimates Prices Confirmed
+          </Alert>
+        ) : (
+          ""
+        )}
         <div className="flex w-3/4 mx-auto mt-10 ">
           <Card className="flex-1 p-5">
             <CardContent className="flex-1">
+              <div style={{ fontSize: 25, textAlign: "center" }}>
+                Estimated Prices
+              </div>
               <TableRow>
                 <StyledTableCell style={{ fontSize: 20 }}>
                   Invoice No: {itemList.id}
@@ -100,12 +142,11 @@ const ViewInvoice = (props) => {
                   </TableBody>
                 </Table>
               </TableContainer>
-              <div className="flex w-80 my-3 mx-8 justify-center ">
+              <div className="flex  my-3 mx-8 justify-center">
                 <Link to="/procurement/invoices">
                   <Button
-                    fullWidth
                     variant="contained"
-                    size="small"
+                    size="large"
                     style={{
                       backgroundColor: "gray",
                       borderRadius: 25,
@@ -115,13 +156,24 @@ const ViewInvoice = (props) => {
                   </Button>
                 </Link>
                 <Button
-                  fullWidth
                   variant="contained"
-                  size="small"
+                  size="large"
+                  style={{
+                    backgroundColor: "red",
+                    borderRadius: 25,
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="contained"
+                  size="large"
                   style={{
                     backgroundColor: "green",
                     borderRadius: 25,
                   }}
+                  // onClick={onSubmit}
+                  onClick={handleClickOpen}
                 >
                   Send to accounts
                 </Button>
@@ -130,6 +182,27 @@ const ViewInvoice = (props) => {
           </Card>
         </div>
       </div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Please Confirm Your Decision!"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description"></DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={disAgree} style={{ color: "red" }}>
+            Disagree
+          </Button>
+          <Button onClick={agree} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
