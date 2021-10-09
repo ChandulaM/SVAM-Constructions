@@ -8,9 +8,9 @@ export const Items = [
     status: "Pending",
     items: [
       { id: 1, name: "Cement", quantity: 5, unit: "kg", price: 1000.0 },
-      { id: 2, name: "Mortar", quantity: 15, unit: "g", price: 900.0 },
-      { id: 3, name: "Sand", quantity: 1, unit: "t", price: 1500.123 },
-      { id: 4, name: "Gravel", quantity: 50, unit: "kg", price: 2000.023 },
+      { id: 2, name: "Mortar", quantity: 15, unit: "g", price: 70.0 },
+      { id: 3, name: "Sand", quantity: 1, unit: "t", price: 10000.0 },
+      { id: 4, name: "Gravel", quantity: 50, unit: "kg", price: 100.0 },
     ],
   },
   {
