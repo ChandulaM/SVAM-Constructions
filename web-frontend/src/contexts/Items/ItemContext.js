@@ -3,7 +3,7 @@ import { dummyItems } from "./misc/dummyItems";
 
 export const ItemContext = createContext();
 
-const ItemContextProvider = (props) => {
+export const ItemContextProvider = (props) => {
   const [items, setItems] = useState(dummyItems);
 
   return (
@@ -12,5 +12,3 @@ const ItemContextProvider = (props) => {
     </ItemContext.Provider>
   );
 };
-
-export default ItemContextProvider;

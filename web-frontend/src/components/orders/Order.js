@@ -21,7 +21,7 @@ const Order = ({ order }) => {
       ) : (
         ""
       )}
-      <div className="order-card">
+      <div className="order-card" title="order-card">
         <div className="flex flex-row flex-1 justify-between my-2">
           <p className="font-semibold text-xl">Order ID</p>
           <p className="font-normal text-xl text-gray-600">{order.id}</p>
@@ -37,6 +37,7 @@ const Order = ({ order }) => {
         <div className="flex flex-row flex-1 justify-between items-center my-2">
           <Button
             onClick={() => setisClicked(true)}
+            title="orderViewBtn"
             fullWidth
             style={{
               borderRadius: 35,

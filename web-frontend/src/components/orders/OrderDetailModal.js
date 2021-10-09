@@ -33,7 +33,7 @@ function OrderDetailModal({ order, open, setOpen }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="flex-col">
+          <div className="flex-col" title="orderDetailModal">
             <div className="text-2xl">
               Order No - <span className="font-semibold">{order.id}</span>
             </div>

@@ -23,16 +23,16 @@ it("renders sidenav in component", () => {
   expect(sidenav).toBeTruthy();
 });
 
-describe("when entering values", () => {
-  const { queryByTitle } = render(
-    <MemoryRouter initialEntries={[{ pathname: "/" }]}>
-      <SetPrice />
-    </MemoryRouter>
-  );
+// describe("when entering values", () => {
+//   const { queryByTitle } = render(
+//     <MemoryRouter initialEntries={[{ pathname: "/" }]}>
+//       <SetPrice />
+//     </MemoryRouter>
+//   );
 
-  const enteredPrice = queryByTitle("price").querySelector("input");
+//   const enteredPrice = queryByTitle("price").querySelector("input");
 
-  fireEvent.input(enteredPrice, { target: { value: 123 } });
+//   fireEvent.input(enteredPrice, { target: { value: 123 } });
 
-  expect(enteredPrice.value).toBe("123");
-});
+//   expect(enteredPrice.value).toBe("123");
+// });
